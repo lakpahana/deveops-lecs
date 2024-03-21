@@ -4,10 +4,7 @@
 #variables
 #https://developer.hashicorp.com/terraform/language/values/variables
 
-variable "ami" {
-  default = "ami-830c94e3"
-    type = string 
-}
+
 
 variable "instance_type" {
   default = "t2.micro"
@@ -15,7 +12,7 @@ variable "instance_type" {
 }
 
 variable "tags" {
-  default = "First"
+  default = "First_2"
   type = string  
 }
 
@@ -33,11 +30,21 @@ terraform {
 //c
 provider "aws" {
     region = "us-east-1"
-    shared_credentials_files = [ "credentials" ]
+    # shared_credentials_files = [ "credentials" ]
     profile = "default"
 }
 
-resource "aws_instance" "first_server" {
+resource "aws_instance" "first_server2" {
+    #aws machine image 
+    #https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+    ami = var.ami
+    instance_type = var.instance_type
+    tags = {
+      Name = var.tags
+    } 
+}
+
+resource "aws_instance" "first_server3" {
     #aws machine image 
     #https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
     ami = var.ami
